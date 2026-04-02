@@ -1,4 +1,4 @@
-# grocery-Management-system
+# Grocery-Management-system
 A Djanjo-based web application to manage grocery items with user authentication.
 
 # Features
