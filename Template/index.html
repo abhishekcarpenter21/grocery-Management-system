@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grocery Products</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: #0c831f;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .navbar a button {
+            background: white;
+            color: #0c831f;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Grid */
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 25px;
+            padding: 20px 40px;
+        }
+
+        /* Card */
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        }
+
+        /* Image */
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* Quantity Badge */
+        .qty-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ffcc00;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Title */
+        .product-card h3 {
+            margin: 10px 0 5px;
+            font-size: 16px;
+        }
+
+        /* Price */
+        .price {
+            color: #0c831f;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        /* Description */
+        .desc {
+            font-size: 13px;
+            color: #666;
+            height: 32px;
+            overflow: hidden;
+        }
+
+        /* Date */
+        .small-text {
+            font-size: 11px;
+            color: gray;
+            margin-top: 5px;
+        }
+
+        /* Bill */
+        .bill-link {
+            font-size: 12px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .delete {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        .update {
+            background: #ffc107;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        /* Empty image */
+        .no-img {
+            text-align: center;
+            font-size: 12px;
+            color: gray;
+            padding: 40px 0;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <h2>🛒 Grocery</h2>
+    <a href="/add/"><button>Add Product</button></a>
+</div>
+
+<h1>Fresh Grocery Items</h1>
+
+<div class="product-container">
+
+    {% for i in products %}
+    <div class="product-card">
+
+        <!-- Quantity badge -->
+        <div class="qty-badge">Qty: {{ i.quantity }}</div>
+
+        {% if i.image %}
+            <img src="{{ i.image.url }}">
+        {% else %}
+            <div class="no-img">No Image</div>
+        {% endif %}
+
+        <h3>{{ i.name }}</h3>
+        <p class="price">₹{{ i.price }}</p>
+
+        <p class="desc">{{ i.description }}</p>
+
+        {% if i.bill %}
+            <a class="bill-link" href="{{ i.bill.url }}">📄 View Bill</a>
+        {% else %}
+            <p class="small-text">No Bill</p>
+        {% endif %}
+
+        <p class="small-text">Added: {{ i.register_at }}</p>
+
+        <!-- SAME LINKS -->
+        <div class="actions">
+            <a href="{% url 'del' i.id %}">
+                <button class="btn delete">Delete</button>
+            </a>
+
+            <a href="{% url 'update' i.id %}">
+                <button class="btn update">Update</button>
+            </a>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Grocery App</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ecfdf5, #bbf7d0);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Card */
+        .login-box {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            width: 320px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Title */
+        h2 {
+            margin-bottom: 20px;
+            color: #0c831f;
+        }
+
+        /* Inputs */
+        input {
+            width: 100%;
+            padding: 11px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #0c831f;
+            box-shadow: 0 0 5px rgba(12,131,31,0.3);
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0c831f;
+            border: none;
+            color: white;
+            font-size: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #096b18;
+        }
+
+        /* Footer */
+        p {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        a {
+            color: #0c831f;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+        <h2>🔐 Login to Grocery</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p>Don't have an account? 
+            <a href="{% url 'register' %}">Register</a>
+        </p>
+    </div>
+
+</body>
+
+</html>

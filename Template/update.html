@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Product</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            margin: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(90deg, #0c831f, #16a34a);
+            padding: 15px 30px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Container */
+        .container {
+            width: 420px;
+            margin: 60px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Inputs */
+        label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0 12px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #0c831f;
+            box-shadow: 0 0 5px rgba(12,131,31,0.3);
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #f59e0b;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #d97706;
+        }
+
+        /* Back link */
+        .back {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: #0c831f;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    ✏️ Update Product
+</div>
+
+<div class="container">
+    <h2>Edit: {{products.name}}</h2>
+
+    <!-- SAME FORM -->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Name:</label>
+        <input type="text" name="name" value="{{products.name}}" required>
+
+        <label>Price:</label>
+        <input type="number" name="price" value="{{products.price}}">
+
+        <label>Quantity:</label>
+        <input type="text" name="quantity" value="{{products.quantity}}">
+
+        <label>Description:</label>
+        <textarea name="description">{{products.description}}</textarea>
+
+        <label>Image:</label>
+        <input type="file" name="image">
+
+        <label>Bill:</label>
+        <input type="file" name="bill">
+
+        <button type="submit">💾 Update Product</button>
+    </form>
+
+    <!-- Back -->
+    <div class="back">
+        <a href="/">← Back to Products</a>
+    </div>
+</div>
+
+</body>
+</html>
