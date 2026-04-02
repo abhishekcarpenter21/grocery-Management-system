@@ -4,7 +4,7 @@ A Djanjo-based web application to manage grocery items with user authentication.
 # Features
 - User Login & Register
 - Add / Update / Delete Products
-- Image Uplaod
+- Image Upload
 - Deployed on Render
 
 # Tech Stack 
